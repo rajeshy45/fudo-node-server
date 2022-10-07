@@ -112,7 +112,7 @@ let person = {
     superadmin: null,
 };
 
-const baseURL = "https://monumental-panda-5ca733.netlify.app";
+const baseURL = "https://fudo-restaurant.netlify.app";
 
 app.get("/", function (req, res) {
     res.json({

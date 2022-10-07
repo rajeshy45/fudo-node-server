@@ -278,11 +278,11 @@ app.post("/place-orders", function (req, res) {
 });
 
 app.post("/item/:id", function (req, res) {
-    res.redirect("/item/" + req.params.id);
+    res.redirect(baseURL + "/item/" + req.params.id);
 });
 
 app.post("/menu/c/:category", function (req, res) {
-    res.redirect("/menu/c/" + req.params.category);
+    res.redirect(baseURL + "/menu/c/" + req.params.category);
 });
 
 app.post("/:person/logout", function (req, res) {
@@ -365,7 +365,7 @@ app.post("/:person/signup", function (req, res) {
             user.save();
             authentication.user = true;
             person.user = user;
-            res.redirect("/home");
+            res.redirect(baseURL + "/home");
         } else if (req.params.person === "manager") {
             const manager = new Manager({
                 fname: fname,
@@ -376,7 +376,7 @@ app.post("/:person/signup", function (req, res) {
             manager.save();
             authentication.manager = true;
             person.manager = manager;
-            res.redirect("/manager");
+            res.redirect(baseURL + "/manager");
         } else {
             const superadmin = new Superadmin({
                 fname: fname,
@@ -387,14 +387,14 @@ app.post("/:person/signup", function (req, res) {
             superadmin.save();
             authentication.superadmin = true;
             person.superadmin = superadmin;
-            res.redirect("/superadmin");
+            res.redirect(baseURL + "/superadmin");
         }
     });
 });
 
 app.post("/search", function (req, res) {
     const searchString = req.body.search;
-    res.redirect("/menu/" + searchString);
+    res.redirect(baseURL + "/menu/" + searchString);
 });
 
 app.post("/add-item", function (req, res) {

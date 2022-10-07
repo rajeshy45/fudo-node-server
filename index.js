@@ -90,15 +90,15 @@ const Item = mongoose.model("Item", itemSchema);
 const Order = mongoose.model("Order", orderSchema);
 const CartItem = new mongoose.model("CartItem", cartItemSchema);
 
-if (
-    process.env.NODE_ENV === "production" ||
-    process.env.NODE_ENV === "staging"
-) {
-    app.use(express.static("client/build"));
-    app.get("*", (req, res) => {
-        res.sendFile(path.join(__dirname + "/client/build/index.html"));
-    });
-}
+// if (
+//     process.env.NODE_ENV === "production" ||
+//     process.env.NODE_ENV === "staging"
+// ) {
+//     app.use(express.static("client/build"));
+//     app.get("*", (req, res) => {
+//         res.sendFile(path.join(__dirname + "/client/build/index.html"));
+//     });
+// }
 
 let authentication = {
     user: false,

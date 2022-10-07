@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const path = require('path');
+const path = require("path");
 const saltRounds = 10;
 dotenv.config();
 
@@ -19,6 +19,19 @@ app.use(
 );
 app.use(bodyParser.json());
 app.use(express.static("public"));
+
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    );
+    res.header(
+        "Access-Control-Allow-Methods",
+        "PUT, POST, GET, DELETE, OPTIONS"
+    );
+    next();
+});
 
 mongoose.connect(process.env.DB_URL);
 
@@ -77,7 +90,6 @@ const Item = mongoose.model("Item", itemSchema);
 const Order = mongoose.model("Order", orderSchema);
 const CartItem = new mongoose.model("CartItem", cartItemSchema);
 
-
 if (
     process.env.NODE_ENV === "production" ||
     process.env.NODE_ENV === "staging"
@@ -87,7 +99,6 @@ if (
         res.sendFile(path.join(__dirname + "/client/build/index.html"));
     });
 }
-
 
 let authentication = {
     user: false,

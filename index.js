@@ -112,6 +112,8 @@ let person = {
     superadmin: null,
 };
 
+const baseURL = "https://monumental-panda-5ca733.netlify.app";
+
 app.get("/", function (req, res) {
     res.json({
         success: true,
@@ -287,15 +289,15 @@ app.post("/:person/logout", function (req, res) {
     if (req.params.person === "user") {
         authentication.user = false;
         person.user = null;
-        res.redirect("/");
+        res.redirect(baseURL + "/");
     } else if (req.params.person === "manager") {
         authentication.manager = false;
         person.manager = null;
-        res.redirect("/manager");
+        res.redirect(baseURL + "/manager");
     } else {
         authentication.superadmin = false;
         person.superadmin = null;
-        res.redirect("/superadmin");
+        res.redirect(baseURL + "/superadmin");
     }
 });
 
@@ -312,7 +314,7 @@ app.post("/:person/login", function (req, res) {
                     }
                 });
             }
-            res.redirect("/home");
+            res.redirect(baseURL + "/home");
         });
     } else if (req.params.person === "manager") {
         Manager.findOne({ username: username }, function (err, manager) {
@@ -328,7 +330,7 @@ app.post("/:person/login", function (req, res) {
                     }
                 );
             }
-            res.redirect("/manager");
+            res.redirect(baseURL + "/manager");
         });
     } else {
         Superadmin.findOne({ username: username }, function (err, superadmin) {
@@ -344,7 +346,7 @@ app.post("/:person/login", function (req, res) {
                     }
                 );
             }
-            res.redirect("/superadmin");
+            res.redirect(baseURL + "/superadmin");
         });
     }
 });
